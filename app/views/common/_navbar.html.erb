@@ -12,6 +12,7 @@
           <li class="nav-item"><%= link_to("註冊", new_user_registration_path, class: "nav-link") %> </li>
           <li><%= link_to("登入", new_user_session_path, class: "nav-link") %></li>
         <% else %>
+          <p>購物車(<%= current_cart.products.count %>)</p>
           <li class="nav-item dropdown ">
             <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" 
             data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
