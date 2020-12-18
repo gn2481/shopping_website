@@ -1,2 +1,19 @@
-<h1>商品內容</h1>
 
+<div class="row">
+  <div class="col-4">
+    <img class="w-100" src="<%= @product.image %>" alt="">
+  </div>
+
+  <div class="col-8 position-realtive">
+    <h1><%= @product.title %></h1>
+    <div>
+      <%= @product.description %>
+    </div>
+    <h3>庫存
+      <%= @product.quantity %>
+    </h3>
+    <h3 class="position-absolute" style="bottom: 0px">單價
+      <%= @product.price %>
+    </h3>
+  </div>
+</div>

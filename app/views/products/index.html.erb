@@ -14,7 +14,7 @@
 
   <% @products.each do |p| %>
     <tr>
-      <td><%= p.title %></td>
+      <td><%= link_to p.title, product_path(p)%></td>
       <td><img class="w-50" src="<%= p.image.thumb %>" alt=""></td>
       <td><%= p.description %></td>
       <td><%= p.quantity %></td>
