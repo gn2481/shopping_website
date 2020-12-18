@@ -1,13 +1,18 @@
 <h1>商品列表</h1>
-<table>
-  <tr>
-    <th>品名</th>
-    <th>商品敘述</th>
-    <th>庫存</th>
-    <th>價格</th>
-    <th>選項</th>
-    <th>上架時間</th>
-  </tr>
+<div class="d-flex justify-content-end">
+<%= link_to  "新增商品", new_admin_product_path, class: "btn btn-outline-secondary" %>
+</div>
+<table class="table">
+  <thead>
+    <tr>
+      <th>品名</th>
+      <th>商品敘述</th>
+      <th>庫存</th>
+      <th>價格</th>
+      <th>選項</th>
+      <th>上架時間</th>
+    </tr>
+  </thead>
 
   <tr>
     <% @products.each do |p| %>
@@ -16,9 +21,8 @@
     <td><%= p.quantity %></td>
     <td><%= p.price %></td>
     <td>
-      <%= link_to  "Edit", edit_admin_product(p) %>|
-      <%= link_to  "Destroy", a %>
-
+      <%= link_to  "Edit", edit_admin_product_path(p) %> |
+      <%= link_to  "Destroy", admin_product_path(p), method: 'delete', data: {confirm: '確認刪除嗎？'} %>
     </td>
     <td><%= p.created_at %></td>
   <% end %>
