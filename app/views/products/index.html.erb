@@ -20,7 +20,7 @@
       <td><%= p.quantity %></td>
       <td><%= p.price %></td>
       <td>
-      <button class="btn btn-outline-secondary">加入購物車</button>
+        <%= link_to  "加入購物車",  add_to_cart_product_path(p), method: 'post', class:'btn btn-outline-secondary' %>
       </td>
       <td><%= p.created_at %></td>
     </tr>
