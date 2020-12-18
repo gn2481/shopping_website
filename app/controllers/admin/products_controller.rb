@@ -29,11 +29,10 @@ class Admin::ProductsController < ApplicationController
   end
 
   def update
-    if @product.update
+    if @product.update(product_params)
       redirect_to root_path, notice: "商品編輯成功！"
     else
-      render :edit
-      redirect_to root_path, notice: "請再試一次！"
+      render :edit, notice: "請再試一次！"
     end
   end
 
@@ -46,7 +45,7 @@ class Admin::ProductsController < ApplicationController
   end
 
   def product_params
-    params.require(:product).permit(:title, :description, :price, :quantity)
+    params.require(:product).permit(:title, :description, :price, :quantity, :image)
   end
 
   def require_is_admin

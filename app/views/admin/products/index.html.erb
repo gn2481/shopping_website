@@ -6,6 +6,7 @@
   <thead>
     <tr>
       <th>品名</th>
+      <th>商品圖片</th>
       <th>商品敘述</th>
       <th>庫存</th>
       <th>價格</th>
@@ -14,17 +15,18 @@
     </tr>
   </thead>
 
-  <tr>
-    <% @products.each do |p| %>
-    <td><%= p.title %></td>
-    <td><%= p.description %></td>
-    <td><%= p.quantity %></td>
-    <td><%= p.price %></td>
-    <td>
-      <%= link_to  "Edit", edit_admin_product_path(p) %> |
-      <%= link_to  "Destroy", admin_product_path(p), method: 'delete', data: {confirm: '確認刪除嗎？'} %>
-    </td>
-    <td><%= p.created_at %></td>
+  <% @products.each do |p| %>
+    <tr>
+      <td><%= p.title %></td>
+      <td><img class="w-50" src="<%= p.image.thumb %>" alt=""></td>
+      <td><%= p.description %></td>
+      <td><%= p.quantity %></td>
+      <td><%= p.price %></td>
+      <td>
+        <%= link_to  "Edit", edit_admin_product_path(p) %> |
+        <%= link_to  "Destroy", admin_product_path(p), method: 'delete', data: {confirm: '確認刪除嗎？'} %>
+      </td>
+      <td><%= p.created_at %></td>
+    </tr>
   <% end %>
-  </tr>
 </table>
