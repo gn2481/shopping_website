@@ -1,0 +1,26 @@
+<h1>商品列表</h1>
+<table class="table">
+  <thead>
+    <tr>
+      <th>品名</th>
+      <th>商品敘述</th>
+      <th>庫存</th>
+      <th>價格</th>
+      <th>選項</th>
+      <th>上架時間</th>
+    </tr>
+  </thead>
+
+  <tr>
+    <% @products.each do |p| %>
+    <td><%= p.title %></td>
+    <td><%= p.description %></td>
+    <td><%= p.quantity %></td>
+    <td><%= p.price %></td>
+    <td>
+      加入購物車
+    </td>
+    <td><%= p.created_at %></td>
+  <% end %>
+  </tr>
+</table>
