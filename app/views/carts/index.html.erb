@@ -1,7 +1,9 @@
 <div class="row">
   <div class="col-12">
-    <h2>購物車</h2>
-
+    <div class="row justify-content-between">
+      <h2>購物車</h2>
+      <%= link_to "清空購物車", clean_carts_path(current_cart), method: "delete", class: "btn btn-danger", data:{confirm:"確定清空整個購物車嗎？"} %>
+    </div>
     <table class="table">
       <thead>
         <th>商品圖片</th>
