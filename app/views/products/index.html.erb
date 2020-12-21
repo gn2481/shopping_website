@@ -27,7 +27,11 @@
       <td><%= p.quantity %></td>
       <td><%= p.price %></td>
       <td>
-        <%= link_to  "加入購物車",  add_to_cart_product_path(p), method: 'post', class:'btn btn-outline-secondary' %>
+        <% if p.quantity > 0 %>
+          <%= link_to  "加入購物車",  add_to_cart_product_path(p), method: 'post', class:'btn btn-outline-secondary' %>
+        <% else %>
+          <div class="badge bg-danger text-wrap fs-5" style="color: #fff; width: 7rem;">已銷售一空！請耐心等待補貨</div>
+        <% end %>
       </td>
       <td><%= p.created_at %></td>
     </tr>
