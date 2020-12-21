@@ -1,6 +1,6 @@
 <h1>商品列表</h1>
 <div class="d-flex justify-content-end">
-<%= link_to  "新增商品", new_admin_product_path, class: "btn btn-outline-secondary" %>
+  <%= link_to  "新增商品", new_admin_product_path, class: "btn btn-outline-secondary" %>
 </div>
 <table class="table">
   <thead>
@@ -16,17 +16,23 @@
   </thead>
 
   <% @products.each do |p| %>
-    <tr>
-      <td><%= link_to p.title, admin_product_path(p)%></td>
-      <td><img class="w-50" src="<%= p.image.thumb %>" alt=""></td>
-      <td><%= p.description %></td>
-      <td><%= p.quantity %></td>
-      <td><%= p.price %></td>
-      <td>
-        <%= link_to  "Edit", edit_admin_product_path(p) %> |
-        <%= link_to  "Destroy", admin_product_path(p), method: 'delete', data: {confirm: '確認刪除嗎？'} %>
-      </td>
-      <td><%= p.created_at %></td>
-    </tr>
+  <tr>
+    <td><%= link_to p.title, admin_product_path(p)%></td>
+    <td>
+      <% if p.image.present? %>
+        <%= image_tag(p.image.thumb.url, class: "thumbnail" ) %>
+      <% else %>
+        <%= image_tag("http://placehold.it/200x200&text=No Pic", class: "thumbnail" ) %>
+      <% end %>
+    </td>
+    <td><%= p.description %></td>
+    <td><%= p.quantity %></td>
+    <td><%= p.price %></td>
+    <td>
+      <%= link_to  "Edit", edit_admin_product_path(p) %> |
+      <%= link_to  "Destroy", admin_product_path(p), method: 'delete', data: {confirm: '確認刪除嗎？'} %>
+    </td>
+    <td><%= p.created_at %></td>
+  </tr>
   <% end %>
 </table>
