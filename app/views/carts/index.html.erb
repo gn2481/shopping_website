@@ -12,8 +12,7 @@
         <th>數量</th>
         <th></th>
       </thead>
-      <!-- 這裡因為是 多對多的關係，為何不能使用 current_cart.products ? -->
-      <!-- 要取用 購買商品數量 一定要使用 cart_item.quantity ？ -->
+
       <tbody>
         <% current_cart.cart_items.each do |cart_item| %>
           <tr>
@@ -54,7 +53,7 @@
           總共 NTD $<%= render_total_price(current_cart) %>
         </span>
         <br>
-        <button class="btn btn-danger">確認結帳</button>
+        <%= link_to  "確認結帳", checkout_carts_path, class: "btn btn-warning" %>
       </div>
     </div>
   </div>
