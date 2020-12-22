@@ -1,0 +1,40 @@
+<h2>訂單明細</h2>
+<table class = "table">
+  <thead>
+    <tr>
+      <th>商品明細</th>
+      <th>單價</th>
+      <th>訂購數量</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @product_lists.each do |list| %>
+      <tr>
+        <td><%= list.product_name %></td>
+        <td><%= list.product_price %></td>
+        <td><%= list.quantity %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<div class="border-bottom d-flex justify-content-end">
+  總計 <%= @order.total %> NTD
+</div>
+
+<h2>寄送資訊</h2>
+<table>
+  <thead>
+    <th>訂購人</th>
+  </thead>
+  <tbody>
+    <td><%= @order.billing_name %> - <%= @order.billing_address %></td>
+  </tbody>
+
+  <thead>
+    <th>收件人</th>
+  </thead>
+  <tbody>
+    <td><%= @order.ship_name %> - <%= @order.ship_address %></td>
+  </tbody>
+</table>

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_12_21_092324) do
+ActiveRecord::Schema.define(version: 2020_12_22_025430) do
 
   create_table "cart_items", force: :cascade do |t|
     t.integer "cart_id", null: false
@@ -29,7 +29,7 @@ ActiveRecord::Schema.define(version: 2020_12_21_092324) do
 
   create_table "orders", force: :cascade do |t|
     t.integer "total", default: 0
-    t.integer "user_id"
+    t.integer "user_id", null: false
     t.string "billing_name"
     t.string "billing_address"
     t.string "ship_name"
@@ -37,6 +37,16 @@ ActiveRecord::Schema.define(version: 2020_12_21_092324) do
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["user_id"], name: "index_orders_on_user_id"
+  end
+
+  create_table "product_lists", force: :cascade do |t|
+    t.integer "order_id", null: false
+    t.string "product_name"
+    t.integer "product_price"
+    t.integer "quantity"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["order_id"], name: "index_product_lists_on_order_id"
   end
 
   create_table "products", force: :cascade do |t|
@@ -64,4 +74,5 @@ ActiveRecord::Schema.define(version: 2020_12_21_092324) do
 
   add_foreign_key "cart_items", "carts"
   add_foreign_key "cart_items", "products"
+  add_foreign_key "product_lists", "orders"
 end
