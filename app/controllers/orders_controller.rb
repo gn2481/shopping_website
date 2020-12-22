@@ -30,6 +30,7 @@ class OrdersController < ApplicationController
     @order = Order.find_by_token(params[:id])
     @order.set_payment_with!("credit_card")
     @order.pay!
+    @order.make_payment! # aasm_state: order_placed -> paid
     redirect_to order_path(@order.token) , notice: "信用卡付款成功"
   end
 
@@ -37,6 +38,7 @@ class OrdersController < ApplicationController
     @order = Order.find_by_token(params[:id])
     @order.set_payment_with!("atm")
     @order.pay!
+    @order.make_payment! # aasm_state: order_placed -> paid
     redirect_to order_path(@order.token) , notice: "atm轉帳成功"
   end
   

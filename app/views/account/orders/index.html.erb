@@ -2,6 +2,7 @@
 <table class="table">
   <thead>
     <tr>
+      <th>訂單狀態</th>
       <th>訂單編號</th>
       <th>訂購人</th>
       <th>收件人</th>
@@ -12,6 +13,7 @@
   <tbody>
     <% @orders.each do |order|%>
     <tr>
+      <td><%= order.aasm_state %></td>
       <td><%= link_to order.token, order_path(order.token) %></td>
       <td><%= order.billing_name %></td>
       <td><%= order.ship_name %></td>

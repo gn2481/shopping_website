@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_12_22_045649) do
+ActiveRecord::Schema.define(version: 2020_12_22_071141) do
 
   create_table "cart_items", force: :cascade do |t|
     t.integer "cart_id", null: false
@@ -39,6 +39,8 @@ ActiveRecord::Schema.define(version: 2020_12_22_045649) do
     t.string "token"
     t.boolean "is_paid", default: false
     t.string "payment_method"
+    t.string "aasm_state", default: "order_placed"
+    t.index ["aasm_state"], name: "index_orders_on_aasm_state"
     t.index ["user_id"], name: "index_orders_on_user_id"
   end
 

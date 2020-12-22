@@ -7,6 +7,46 @@ class Order < ApplicationRecord
 
   belongs_to :user
   has_many :product_lists
+
+  include AASM
+
+  aasm do 
+    state :order_placed, initial: true
+    state :paid
+    state :shipping
+    state :shipped
+    state :order_cancelled
+    state :good_returned
+  end
+
+  # 未付款 -> 已付款
+  event :make_payment do 
+    event :make_payment, after_commit: :pay! do
+      transitions from: :order_placed, to: :paid
+    end
+  end
+
+  # 已付款 -> 出貨中
+  event :ship do 
+    transitions from: :paid, to: :shipping
+  end
+
+  # 出貨中 -> 已到貨
+  event :deliver do 
+    transitions from: :shipping, to: :shipped
+  end
+
+  # 已到貨 -> 退貨
+  event :return_good do 
+    transitions from: :shipped, to: :good_returned
+  end
+  
+  # 已付款 ->
+  # 未付款 -> 取消訂單
+  event :cancel_order do 
+    transitions from: [:order_placed, :paid], to: :order_cancelled
+  end
+
   def set_payment_with!(method)
     self.update(payment_method: method)
   end
@@ -14,7 +54,6 @@ class Order < ApplicationRecord
   def pay!
     self.update(is_paid: true)
   end
-
 
   private
   def generate_token
