@@ -1,0 +1,44 @@
+<h2>訂單明細<%= render_order_paid_state(@order)%></h2>
+
+<table class="table">
+  <thead>
+    <th>商品名稱</th>
+    <th>單價</th>
+    <th>數量</th>
+    <th>小計</th>
+  </thead>
+
+  <tbody>
+    <% @product_lists.each do |list|%>
+      <tr>
+        <td><%= list.product_name %></td>
+        <td><%= list.product_price %></td>
+        <td><%= list.quantity %></td>
+        <td><%= list.product_price * list.quantity %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+<div class="d-flex justify-content-end">
+  總計 <%= @order.total %>
+</div>
+
+<hr>
+
+<h2>寄送資訊</h2>
+  <table class="table table-striped">
+    <tbody>
+        <tr>
+          <td>訂購人</td>
+        </tr>
+        <tr>
+          <td><%= @order.billing_name %> - <%= @order.billing_address %></td>
+        </tr>
+        <tr>
+          <td>收件人</td>
+        </tr>
+        <tr>
+          <td><%= @order.ship_name %> - <%= @order.ship_address %></td>
+        </tr>
+    </tbody>
+  </table>
