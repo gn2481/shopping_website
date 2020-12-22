@@ -6,6 +6,14 @@ class Order < ApplicationRecord
   validates :ship_address, presence: true
 
   has_many :product_lists
+  def set_payment_with!(method)
+    self.update(payment_method: method)
+  end
+
+  def pay!
+    self.update(is_paid: true)
+  end
+
 
   private
   def generate_token
