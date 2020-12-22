@@ -5,7 +5,15 @@ Rails.application.routes.draw do
   
   namespace :admin do
     resources :products
-    resources :orders
+    resources :orders do
+      member do
+        post :cancel  # 取消訂單
+        post :ship    # 出貨
+        post :shipped # 到貨
+        post :return  # 退貨
+
+      end
+    end
   end
 
   namespace :account do
