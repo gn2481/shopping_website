@@ -2,6 +2,7 @@ class OrdersController < ApplicationController
   before_action :authenticate_user!
 
   def show
+    # find_by_欄位名稱
     @order = Order.find_by_token(params[:id])
     @product_lists = @order.product_lists
   end
@@ -11,10 +12,10 @@ class OrdersController < ApplicationController
     @order.total = current_cart.total_price 
     if @order.save
       current_cart.cart_items.each do |item|
-        product_list = @order.product_lists.new
-        product_list.product_name = item.product.title
-        product_list.product_price = item.product.price
-        product_list.quantity = item.quantity
+        product_list = @order.product_lists.new(
+        product_name: item.product.title,
+        product_price: item.product.price,
+        quantity: item.quantity)
         product_list.save
       end
       current_cart.clean!
@@ -29,7 +30,6 @@ class OrdersController < ApplicationController
   def pay_with_credit_card
     @order = Order.find_by_token(params[:id])
     @order.set_payment_with!("credit_card")
-    @order.pay!
     @order.make_payment! # aasm_state: order_placed -> paid
     redirect_to order_path(@order.token) , notice: "信用卡付款成功"
   end
@@ -37,7 +37,6 @@ class OrdersController < ApplicationController
   def pay_with_atm
     @order = Order.find_by_token(params[:id])
     @order.set_payment_with!("atm")
-    @order.pay!
     @order.make_payment! # aasm_state: order_placed -> paid
     redirect_to order_path(@order.token) , notice: "atm轉帳成功"
   end
