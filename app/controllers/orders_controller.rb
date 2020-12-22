@@ -1,7 +1,7 @@
 class OrdersController < ApplicationController
 
   def show
-    @order = Order.find(params[:id])
+    @order = Order.find_by_token(params[:id])
     @product_lists = @order.product_lists
   end
   
@@ -16,7 +16,7 @@ class OrdersController < ApplicationController
         product_list.quantity = item.quantity
         product_list.save
       end
-      redirect_to @order, notice: "訂單建立成功"
+      redirect_to order_path(@order.token) , notice: "訂單建立成功"
     else
       render 'carts/checkout', alert: "請再試一次"
     end
