@@ -1,4 +1,5 @@
 class CartItemsController < ApplicationController
+  before_action :authenticate_user!
   
   def update
     @item = CartItem.find_by(product_id: params[:id])

@@ -1,0 +1,23 @@
+<h2>歷史訂單</h2>
+<table class="table">
+  <thead>
+    <tr>
+      <th>訂單編號</th>
+      <th>訂購人</th>
+      <th>收件人</th>
+      <th>總金額</th>
+      <th>日期</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @orders.each do |order|%>
+    <tr>
+      <td><%= link_to order.token, order_path(order.token) %></td>
+      <td><%= order.billing_name %></td>
+      <td><%= order.ship_name %></td>
+      <td><%= order.total %></td>
+      <td><%= order.created_at.to_s(:long)%></td>
+    </tr>
+    <% end %>
+  </tbody>
+</table>
