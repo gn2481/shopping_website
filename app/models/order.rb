@@ -5,6 +5,7 @@ class Order < ApplicationRecord
   validates :ship_name, presence: true
   validates :ship_address, presence: true
 
+  belongs_to :user
   has_many :product_lists
   def set_payment_with!(method)
     self.update(payment_method: method)
