@@ -14,16 +14,19 @@ class Admin::OrdersController < ApplicationController
   
   def cancel
     @order.cancel_order!
+    OrderMailer.notify_cancel(@order).deliver!
     redirect_back fallback_location: root_path, notice: "已取消訂單"
   end
 
   def ship
     @order.ship!
+    OrderMailer.notify_ship(@order).deliver!
     redirect_back fallback_location: root_path, notice: "已出貨"
   end
 
   def shipped
     @order.deliver!
+    OrderMailer.notify_shipped(@order).deliver!
     redirect_back fallback_location: root_path, notice: "已到貨"
   end
 
