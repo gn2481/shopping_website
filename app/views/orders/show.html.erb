@@ -1,4 +1,9 @@
 <h2>訂單明細</h2>
+<div class="d-flex justify-content-end">
+  <% if @order.order_placed? || @order.paid? %>
+    <%= link_to  "申請取消訂單", apply_to_cancel_order_path(@order.token), method: 'post', class:"btn btn-primary mb-3" %>
+  <% end %>
+</div>
 <table class = "table">
   <thead>
     <tr>
@@ -38,7 +43,7 @@
     <td><%= @order.ship_name %> - <%= @order.ship_address %></td>
   </tbody>
 </table>
-
+ 
 <div class="d-flex justify-content-end">
   <% if !@order.is_paid %>
     <%= link_to  "信用卡付款", pay_with_credit_card_order_path(@order.token), method: 'post', class:"btn btn-danger ml-3" %>

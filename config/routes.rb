@@ -33,12 +33,13 @@ Rails.application.routes.draw do
     end
   end
 
-
   resources :cart_items
+  
   resources :orders do
     member do
       post :pay_with_credit_card
       post :pay_with_atm
+      post :apply_to_cancel
     end
   end
 end

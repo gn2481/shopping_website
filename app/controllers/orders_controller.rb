@@ -1,9 +1,8 @@
 class OrdersController < ApplicationController
   before_action :authenticate_user!
-
+  before_action :find_order, only:[:show, :pay_with_atm, :pay_with_credit_card, :apply_to_cancel]
   def show
     # find_by_欄位名稱
-    @order = Order.find_by_token(params[:id])
     @product_lists = @order.product_lists
   end
   
@@ -40,9 +39,17 @@ class OrdersController < ApplicationController
     @order.make_payment! # aasm_state: order_placed -> paid
     redirect_to order_path(@order.token) , notice: "atm轉帳成功"
   end
+
+  def apply_to_cancel
+    OrderMailer.apply_cancel(@order).deliver!
+    redirect_to order_path(@order.token), notice: "已提交申請"
+  end
   
   private
   def order_params
     params.require(:order).permit(:billing_name, :billing_address, :ship_name, :ship_address)
+  end
+  def find_order
+    @order = Order.find_by_token(params[:id])
   end
 end
