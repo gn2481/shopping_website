@@ -18,10 +18,9 @@ class Admin::ProductsController < ApplicationController
   def create
     @product = Product.new(product_params)
     if @product.save
-      redirect_to root_path, notice: "商品成功新增！"
+      redirect_to admin_products_path, notice: "商品成功新增！"
     else
-      render :new
-      redirect_to root_path, notice: "請再試一次！"
+      render :new, notice: "請再試一次！"
     end
   end
 
@@ -30,7 +29,7 @@ class Admin::ProductsController < ApplicationController
 
   def update
     if @product.update(product_params)
-      redirect_to root_path, notice: "商品編輯成功！"
+      redirect_to admin_products_path, notice: "商品編輯成功！"
     else
       render :edit, notice: "請再試一次！"
     end
